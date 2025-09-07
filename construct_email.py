@@ -164,6 +164,8 @@ def send_email(sender:str, receiver:str, password:str,smtp_server:str,smtp_port:
         logger.warning(f"Try to use SSL.")
         server = smtplib.SMTP_SSL(smtp_server, smtp_port)
 
+    print("userame:", sender)
+    print("password:", password)
     if not password:
       raise RuntimeError("SENDER_PASSWORD is empty!")
       
