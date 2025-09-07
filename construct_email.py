@@ -156,6 +156,12 @@ def send_email(sender:str, receiver:str, password:str,smtp_server:str,smtp_port:
     today = datetime.datetime.now().strftime('%Y/%m/%d')
     msg['Subject'] = Header(f'Daily arXiv {today}', 'utf-8').encode()
 
+    print("sender: ", sender)
+    print("password: ", password)
+    print("smtp_server: ", smtp_server)
+    print("smtp_port：", smtp_port)
+    print("recv: ", receiver)
+    
     try:
         server = smtplib.SMTP(smtp_server, smtp_port)
         server.starttls()
@@ -164,11 +170,6 @@ def send_email(sender:str, receiver:str, password:str,smtp_server:str,smtp_port:
         logger.warning(f"Try to use SSL.")
         server = smtplib.SMTP_SSL(smtp_server, smtp_port)
 
-    print("userame:", sender)
-    print("password:", password)
-    if not password:
-      raise RuntimeError("SENDER_PASSWORD is empty!")
-      
     server.login(sender, password)
     server.sendmail(sender, [receiver], msg.as_string())
     server.quit()
