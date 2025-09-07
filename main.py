@@ -99,11 +99,6 @@ def add_argument(*args, **kwargs):
 
 
 if __name__ == '__main__':
-
-    sender=os.getenv('SENDER_EMAIL')
-    recv =os.getenv('RECEIVER_EMAIL')
-    print('sender:',repr(sender),'\nrecv:',repr(recv))
-
     add_argument('--zotero_id', type=str, help='Zotero user ID')
     add_argument('--zotero_key', type=str, help='Zotero API key')
     add_argument('--zotero_ignore',type=str,help='Zotero collection to ignore, using gitignore-style pattern.')
@@ -145,15 +140,8 @@ if __name__ == '__main__':
         help="Language of TLDR",
         default="English",
     )
-
-    
-
-    
     parser.add_argument('--debug', action='store_true', help='Debug mode')
     args = parser.parse_args()
-
-    print('sender2:',repr(args.sender),'\nrecv2:',repr(args.receiver))
-    
     assert (
         not args.use_llm_api or args.openai_api_key is not None
     )  # If use_llm_api is True, openai_api_key must be provided
